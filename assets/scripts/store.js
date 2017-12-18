@@ -5,7 +5,7 @@ const store = {
     cart: {
       order: {
         products: [],
-        total: 15
+        total: 0
       }
     },
     currentProducts: []

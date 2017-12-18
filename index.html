@@ -44,15 +44,6 @@
     </div>
     </div>
 
-    <div id="change-password-wrap">
-      <fieldset>
-      <form id="change-password" class="mechanic">
-        <input class="form-control" type="text" name="passwords[old]" placeholder="Old Password"><br>
-        <input class="form-control" type="text" name="passwords[new]" placeholder="New Password"><br>
-        <button type="submit" class="btn btn-default">Change Password</button>
-      </form>
-    </fieldset>
-    </div>
 
     <!-- ********************* main ********************************** -->
 
@@ -61,16 +52,24 @@
         <h1 class="nozama">Nozama</h1>
         </div>
         <nav class="nav-bar">
-          <button class="btn btn-dark" id="show-sign-in">Sign In</button>
-          <button class="btn btn-dark" id="show-sign-up">Sign Up</button>
+          <button class="btn btn-dark" id="home">Home</button>
+          <button class="btn btn-dark" id="show-sign-in-up">Sign In/Up</button>
+          <!-- <button class="btn btn-dark" id="show-sign-up">Sign Up</button> -->
           <button class="btn btn-dark" id="sign-out">Sign Out</button>
           <button class="btn btn-dark" id="show-shopping-cart">Cart</button>
           <button class="btn btn-dark" id="show-change-password">Change Password</button>
           <button class="btn btn-dark" id="show-past-orders">View Orders</button>
           </nav>
 
-          <div class="orders-wrap">
-            </div>
+          <div id="change-password-wrap">
+            <fieldset>
+            <form id="change-password" class="mechanic">
+              <input class="form-control" type="password" name="passwords[old]" placeholder="Old Password"><br>
+              <input class="form-control" type="password" name="passwords[new]" placeholder="New Password"><br>
+              <button type="submit" class="btn btn-default">Change Password</button>
+            </form>
+          </fieldset>
+          </div>
 
       <div class='products-wrap'>
         <h4 id="main-message">HI!</h4>

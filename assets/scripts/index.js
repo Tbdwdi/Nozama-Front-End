@@ -18,10 +18,11 @@ $(() => {
   $('#sign-out').hide()
   $('#show-shopping-cart').hide()
   $('#show-change-password').hide()
-
+  $('#show-past-orders').hide()
   $('#update-product').hide()
   $('.admin').hide()
   $('.orders-wrap').show()
+  $('.add-product-button').hide()
 })
 
 // use require with a reference to bundle the file and use it in this file

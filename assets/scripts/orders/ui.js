@@ -8,41 +8,59 @@ const prodEvents = require('../products/events.js')
 // show users stored products
 const onShowCart = function () {
   const data = store.currentCart.currentProducts
-  store.cartTotal = data.map((item) => item.price).reduce((acc, price) => acc + price)
-  $('.cart-products').append(cart({ products: data, cartTotal: store.cartTotal }))
+  if (store.currentCart.currentProducts.length > 0) {
+    const total = data.map((item) => item.price).reduce((acc, price) => acc + price)
+    store.currentCart.cart.order.total = total
+    $('.cart-products').append(cart({ products: data, cartTotal: total }))
+    $('.order-wrap').html('')
+  } else {
+    $('.cart-products').append('You have no products in your cart')
+  }
 }
 
 // success message to submit users stored data to orders
 const submitOrderSuccess = function () {
-  console.log('Successfully posted an order!')
+  $('.sign-message').text('Successfully posted an order!')
+  store.currentCart = {
+    cart: {
+      order: {
+        products: [],
+        total: 0
+      }
+    },
+    currentProducts: []
+  }
+  store.myOrders = []
+  store.productIdArr = []
 }
 
 // failure message for submit order
 const submitOrderFailure = function () {
-  console.log('Order not posted successfully')
+  $('.sign-message').text('Order not posted successfully')
 }
 
 const showOrdersSuccess = function (data) {
   store.myOrders = data.orders.filter(order => {
     return order._owner === store.user.id
   })
-  console.log(store.myOrders[0].id)
-  $('.orders-wrap').append(orders({ orders: store.myOrders }))
+  if (store.myOrders.length > 0) {
+    $('.orders-wrap').append(orders({ orders: store.myOrders }))
+  } else {
+    $('.orders-wrap').append('<p>You have no orders</p>')
+  }
 }
 
 const showOrdersFailure = function () {
-  console.log('failed getting orders')
+  $('.sign-message').text('failed getting orders')
 }
 
 const getOrderSuccess = function (data) {
   store.myOrder = data.order
-  console.log('your order ', data.order)
   displayOrder(store.myOrder)
 }
 
 const getOrderFailure = function (data) {
-  console.log('your order ', data)
-  console.log('get order failure')
+  $('.sign-message').text('get order failure')
 }
 
 const displayOrder = function (order) {

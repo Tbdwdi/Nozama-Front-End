@@ -30,7 +30,9 @@ const checkout = function () {
           data
         })
       }
-      sendToken(tokenData).then(console.log('great success!')).catch(console.error)
+      sendToken(tokenData)
+        .then(() => $('.sign-message').text('Payment Successful'))
+        .catch(() => $('.sign-message').text('Payment Failed'))
     }
   })
   document.getElementById('submit-cart-stripe').addEventListener('click', function (e) {
@@ -38,7 +40,7 @@ const checkout = function () {
     handler.open({
       name: 'Demo Site',
       description: '2 widgets',
-      amount: (store.cartTotal * 100)
+      amount: (store.currentCart.cart.order.total * 100)
     })
     e.preventDefault()
   })
@@ -52,8 +54,12 @@ $script('https://checkout.stripe.com/checkout.js', checkout)
 
 // show cart (hbs template) and hide products
 const showCart = function () {
+  $('.cart-products').html('')
   $('.products-wrap').hide()
+  $('#change-password-wrap').hide()
   $('.shopping-cart').show()
+  $('.order-wrap').html('')
+  $('.orders-wrap').html('')
   ui.onShowCart()
 }
 
@@ -90,20 +96,22 @@ const onRemoveProduct = function () {
 }
 
 const onShowOrders = function () {
+  $('.orders-wrap').html('')
   api.showOrders()
     .then(ui.showOrdersSuccess)
     .catch(ui.showOrdersFailure)
   $('.products-wrap').hide()
   $('.shopping-cart').hide()
+  $('#change-password-wrap').hide()
   $('.orders-wrap').show()
 }
 
-const onGetOrder = function (event) {
-  const id = $(event.target).parent().parent().parent().data('id')
-  api.getOrder(id)
-    .then(ui.getOrderSuccess)
-    .catch(ui.getOrderFailure)
-}
+// const onGetOrder = function (event) {
+//   const id = $(event.target).parent().parent().parent().data('id')
+//   api.getOrder(id)
+//     .then(ui.getOrderSuccess)
+//     .catch(ui.getOrderFailure)
+// }
 
 const addOrderHandlers = function () {
   $('#show-shopping-cart').on('click', showCart)
@@ -111,7 +119,7 @@ const addOrderHandlers = function () {
   $('#submit-cart').on('click', onSubmitCart)
   $('.cart-products').on('click', '.remove-product', onRemoveProduct)
   $('#show-past-orders').on('click', onShowOrders)
-  $('.orders-wrap').on('click', '.get-order', onGetOrder)
+  // $('.orders-wrap').on('click', '.get-order', onGetOrder)
 }
 
 module.exports = {

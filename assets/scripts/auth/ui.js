@@ -3,27 +3,30 @@ const store = require('../store')
 
 // display message on sign up success
 const signUpSuccess = function (data) {
-  $('#sign-message').text('You signed-up successfully!')
+  $('.sign-message').text('You signed-up successfully!')
   $('.form-control').val('')
 }
 
 // display message on sign up failure
 const signUpFailure = function () {
-  $('#sign-message').text('Please enter a valid email address and matching passwords')
+  $('.sign-message').text('Please enter a valid email address and matching passwords')
   $('.form-control').val('')
 }
 
 // display message on sign in success
 const signInSuccess = function (data) {
   store.user = data.user
-  console.log(store.user)
-  $('#sign-message').text('You have signed in successfully')
+  $('.sign-message').text('You have signed in successfully')
   $('.main').show()
   $('.sign-in-up-wrap').hide()
   $('#sign-out').show()
   $('#show-shopping-cart').show()
   $('#show-change-password').show()
+  $('#show-past-orders').show()
   $('.form-control').val('')
+  $('#show-sign-in-up').hide()
+  $('#show-sign-up').hide()
+  $('.add-product-button').show()
   if (store.user.admin) {
     $('.admin').show()
   }
@@ -40,11 +43,30 @@ const signInFailure = function () {
 // hide main div and show sign-in/up form
 const signOutSuccess = function () {
   $('.sign-message').text('You have signed out successfully')
-  $('.main').hide()
-  $('.sign-in-up-wrap').show()
-  $('#show-shopping-cart').hide()
+  $('.main').show()
+  $('.products-wrap').show()
+  $('.order-wrap').hide()
+  $('.orders-wrap').hide()
+  $('.shopping-cart').hide()
   $('#show-change-password').hide()
   $('.admin').hide()
+  $('#sign-out').hide()
+  $('#show-past-orders').hide()
+  $('#show-shopping-cart').hide()
+  $('#show-sign-in-up').show()
+  $('#show-sign-up').show()
+  $('.add-product-button').hide()
+  store.currentCart = {
+    cart: {
+      order: {
+        products: [],
+        total: 0
+      }
+    },
+    currentProducts: []
+  }
+  store.myOrders = []
+  store.productIdArr = []
   // reminder from brian { add html classes to clear forms }
 }
 
@@ -57,7 +79,7 @@ const signOutFailure = function () {
 const changeSuccess = function () {
   $('.sign-message').text('You have changed password successfully')
   $('#change-password-wrap').hide()
-  $('.main').show()
+  $('.products-wrap').show()
   $('.form-control').val('')
 }
 

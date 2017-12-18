@@ -5,26 +5,26 @@ const api = require('./api')
 const showProductsHtml = require('../templates/show-products.hbs')
 
 const deleteSuccess = function (event) {
-  console.log('Product Deleted')
+  $('.sign-message').text('Product Deleted')
   $(event.target).parent().remove()
 }
 
 const deleteFailure = function () {
-  console.log('Deletion Failed')
+  $('.sign-message').text('Deletion Failed')
 }
 
 const updateSuccess = function () {
   $('#update-product').hide()
-  console.log('Update Complete')
+  $('.sign-message').text('Update Complete')
   api.getProducts()
     .then(onGetProductsSuccess)
-    .catch(onGetProductsFailure)
+    // .catch(onGetProductsFailure)
 }
 
 // Filling update form fields
 const findSuccess = function (data) {
   const product = data.product
-  console.log('Product retrieved')
+  $('.sign-message').text('Product retrieved')
   $('#update-name').attr('value', product.name)
   $('#update-description').attr('value', product.description)
   $('#update-url').attr('value', product.url)
@@ -34,7 +34,7 @@ const findSuccess = function (data) {
 }
 
 const findFailure = function () {
-  console.log('Product not found')
+  $('.sign-message').text('Product not found')
 }
 
 // retrieves product information and calls a function to populate fields
@@ -47,47 +47,46 @@ const populateUpdateFields = function (id) {
 // Get products index ui show data
 const onGetProductsSuccess = function (data) {
   store.products = data.products
-  // console.log('store is ', store.products)
+  // $('.sign-message').text('store is ', store.products)
   const showProducts = showProductsHtml({ products: data.products })
   // clears list before appending (so you don't have duplicates)
   $('.show-products-content').html('')
   // append content to div
   $('.show-products-content').append(showProducts)
   $('.admin').hide()
+  $('.add-product-button').hide()
   if (store.user.admin) {
     $('.admin').show()
   } else {
-    console.log('you are not an admin')
+    $('.sign-message').text('you are not an admin')
   }
 }
 
 // Get products index show failure message + error
-const onGetProductsFailure = function (error) {
-  console.log('get failure')
-  console.log(error)
-}
+// const onGetProductsFailure = function () {
+//   // $('.sign-message').text('get failure')
+// }
 
 const createSuccess = function () {
-  console.log('Product Created')
+  $('.sign-message').text('Product Created')
 }
 
-const createFailure = function (error) {
-  console.log(error)
+const createFailure = function () {
+  $('.sign-message').text('Product not created')
 }
 
 const getOrderProductSuccess = function (product) {
   store.myOrder.orderProducts.push(product.product)
-  // console.log('product retrieved')
   return store.myOrder.orderProducts
 }
 
 const getOrderProductFailure = function () {
-  console.log('failed to get product')
+  $('.sign-message').text('failed to get product')
 }
 
 module.exports = {
   onGetProductsSuccess,
-  onGetProductsFailure,
+  // onGetProductsFailure,
   updateSuccess,
   populateUpdateFields,
   deleteSuccess,

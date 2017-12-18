@@ -2,7 +2,8 @@
 
 <div class="order-display" data-id="{{order.id}}">
   <ul>
-    <li><button class="btn btn-dark get-order">Date: {{order.createdAt}}</button></li>
+    {{!-- <li><button class="btn btn-dark get-order">Date: {{order.createdAt}}</button></li> --}}
+    <li>Date: {{order.createdAt}}</li>
     <li>Total: ${{order.total}}</li>
     {{!-- <li>Number of items: {{}}</li> --}}
   </ul>
