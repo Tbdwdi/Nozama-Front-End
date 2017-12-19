@@ -26,6 +26,10 @@ const onAddProduct = function () {
   const currentId = $(event.target).parent().parent().data('id')
   const item = store.products.filter((product) => product.id === currentId)
   store.currentCart.currentProducts.push(item[0])
+  $('.sign-message').text('Product added to cart')
+  setTimeout(() => {
+    $('.sign-message').text('')
+  }, 2000)
 }
 
 const onUpdateProduct = function (event) {

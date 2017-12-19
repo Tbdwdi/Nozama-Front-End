@@ -18,6 +18,9 @@ const updateSuccess = function () {
   $('.sign-message').text('Update Complete')
   api.getProducts()
     .then(onGetProductsSuccess)
+    .then(() => {
+      $('.add-product-button').show()
+    })
     // .catch(onGetProductsFailure)
 }
 

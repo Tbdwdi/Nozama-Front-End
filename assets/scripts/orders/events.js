@@ -18,14 +18,15 @@ const checkout = function () {
       }
       const tokenData = {
         token: {
-          token_id: token.id
+          token_id: token.id,
+          total: (store.currentCart.cart.order.total * 100)
         }
       }
       // You can access the token ID with `token.id`.
       // Get the token ID to your server-side code for use.
       const sendToken = function (data) {
         return $.ajax({
-          url: 'localhost:4741/tokens',
+          url: 'https://still-thicket-16022.herokuapp.com/tokens',
           method: 'POST',
           data
         })
@@ -66,6 +67,7 @@ const showCart = function () {
 // show products and hide users cart
 const hideCart = function () {
   $('.shopping-cart').hide()
+  $('#update-product').hide()
   $('.products-wrap').show()
   $('.cart-products').html('')
 }

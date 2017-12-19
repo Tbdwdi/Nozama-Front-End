@@ -1,9 +1,9 @@
 {{#each products as |product|}}
 
   <ul class="product-form" data-id="{{product.id}}">
-    <div>Id: {{product.id}}</div>
     <div>Name: {{product.name}}</div>
     <div>Description: {{product.description}}</div>
+    <div>Price: ${{product.price}}</div>
     {{!-- <div>Stock: {{product.stock}}</div> --}}
     <div class="add-resource-product">
         <button class="add-product-button" type ="button" data-id="{{product.id}}">Add Product</button>
