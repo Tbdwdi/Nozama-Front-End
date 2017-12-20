@@ -13,8 +13,10 @@ const onShowCart = function () {
     store.currentCart.cart.order.total = total
     $('.cart-products').append(cart({ products: data, cartTotal: total }))
     $('.order-wrap').html('')
+    $('#submit-cart-stripe').show()
   } else {
     $('.cart-products').append('You have no products in your cart')
+    $('#submit-cart-stripe').hide()
   }
 }
 
