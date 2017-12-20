@@ -33,8 +33,14 @@ const checkout = function () {
         })
       }
       sendToken(tokenData)
-        .then(() => $('.sign-message').text('Payment Successful'))
-        .catch(() => $('.sign-message').text('Payment Failed'))
+        .then(() => {
+          $('.sign-message').text('Payment Successful')
+          hideCart()
+        })
+        .catch(() => {
+          $('.sign-message').text('Payment Failed')
+          hideCart()
+        })
     }
   })
   document.getElementById('submit-cart-stripe').addEventListener('click', function (e) {
