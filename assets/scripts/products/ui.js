@@ -14,6 +14,9 @@ const deleteFailure = function () {
 }
 
 const updateSuccess = function () {
+  $('#update-name').val('')
+  $('#update-description').val('')
+  $('#update-price').val('')
   $('#update-product').hide()
   $('.sign-message').text('Update Complete')
   api.getProducts()
@@ -24,12 +27,11 @@ const updateSuccess = function () {
 // Filling update form fields
 const findSuccess = function (data) {
   const product = data.product
+  console.log('in find success product is ', product)
   $('.sign-message').text('Product retrieved')
-  $('#update-name').attr('value', product.name)
-  $('#update-description').attr('value', product.description)
-  $('#update-url').attr('value', product.url)
-  $('#update-stock').attr('value', product.stock)
-  $('#update-price').attr('value', product.price)
+  $('#update-name').val(product.name)
+  $('#update-description').val(product.description)
+  $('#update-price').val(product.price)
   $('#update-product').show()
 }
 

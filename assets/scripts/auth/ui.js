@@ -57,6 +57,7 @@ const signOutSuccess = function () {
   $('#show-sign-in-up').show()
   $('#show-sign-up').show()
   $('.add-product-button').hide()
+  $('#update-product').hide()
   store.currentCart = {
     cart: {
       order: {
